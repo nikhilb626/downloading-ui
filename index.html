@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>downloading file</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<body>
+    <div class="download-container">
+        <a href="#" class="download-btn">download files<i class="fas fa-download"></i></a>
+        <div class="countdown"></div>
+        <div class="pleasewait-text">Please wait...</div>
+        <div class="manualdownload-text">
+            If the download didn't start automatically,<a href="#" class="manualdownload-link">click here</a>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    const downloadbtn=document.querySelector(".download-btn");
+    const countdown=document.querySelector(".countdown");
+    const pleasewaitText=document.querySelector(".pleasewait-text");
+    const manualdownloadtext=document.querySelector(".manualdownload-text");
+    const manualdownloadlink=document.querySelector(".manualdownload-link");
+
+
+
+    var timeleft=10;
+    downloadbtn.addEventListener("click",()=>{
+        downloadbtn.style.display="none";
+        var downloadtimer=setInterval(function timeCount(){
+            timeleft-=1;
+            countdown.innerHTML="Download will begin automatically in<span>"+timeleft+"</span> seconds";
+            if(timeleft<=0){
+                clearInterval(downloadtimer);
+                pleasewaitText.style.display="block";
+                let  download_href="test.doc";
+                window.location.href=download_href;
+                manualdownloadlink.href=download_href;
+                setTimeout(()=>{
+                    pleasewaitText.style.display="none";
+                    manualdownloadtext.style.display="block";
+                },4000);
+            }
+
+        },1000);
+    });
+
+    </script>
+</body>
+</html>
